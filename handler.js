@@ -26,3 +26,4 @@ module.exports.getUsers = async (event) => {
     }),
   };
 };
+// Modificación para disparar GitHub Actions
