@@ -1,0 +1,4 @@
+.serverless/
+node_modules/
+.aws/
+*.log

@@ -1,0 +1,27 @@
+org: felipet9108
+service: api-serverless-felipe
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  stage: dev
+  iam:
+    role: arn:aws:iam::319726062882:role/LabRole
+
+functions:
+  login:
+    handler: handler.login
+    events:
+      - http:
+          path: login
+          method: post
+          cors: true
+
+  getUsers:
+    handler: handler.getUsers
+    events:
+      - http:
+          path: users
+          method: get
+          cors: true
