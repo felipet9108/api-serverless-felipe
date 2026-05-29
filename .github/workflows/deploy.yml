@@ -1,0 +1,37 @@
+name: Deploy API Serverless Felipe
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código de GitHub
+        uses: actions/checkout@v4
+
+      - name: Instalación de Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalación del Serverless Framework
+        run: npm install -g serverless
+
+      - name: Autenticación en Serverless Framework CLI
+        run: serverless login --auth-token ${{ secrets.SERVERLESS_ACCESS_TOKEN }}
+
+      - name: Configurar Credenciales de AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Despliegue Automático a AWS Lambda via Serverless
+        run: serverless deploy
