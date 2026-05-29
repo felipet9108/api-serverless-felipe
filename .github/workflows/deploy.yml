@@ -3,7 +3,7 @@ name: Deploy API Serverless Felipe
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
